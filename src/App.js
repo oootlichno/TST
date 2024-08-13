@@ -7,15 +7,16 @@ function App() {
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
 
+  const getTodos = async () => {
+    try {
+      const res = await axios.get("http://localhost:9000/todos");
+      setTodos(res.data);
+    } catch {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const getTodos = async () => {
-      try {
-        const res = await axios.get("http://localhost:9000/todos");
-        setTodos(res.data);
-      } catch {
-        console.error(error);
-      }
-    };
     getTodos();
   }, []);
 
@@ -30,8 +31,17 @@ function App() {
   const logStuff = () => {
     console.log('logging stuff')
   }
+  
+  const handleUpdate = async (todo) => {
+    await axios.put(
+      `http://localhost:9000/todos/${todo.id}`,
+      { ...todo, completed: !todo.completed }
+    );
+    getTodos();
+  };
 
-  const onDelete = async (id) => {
+  const onDelete = async (event, id) => {
+    event.stopPropagation();
     await axios.delete(`http://localhost:9000/todos/${id}`);
     setTodos(todos.filter((todo) => todo.id !== id));
   };
@@ -41,7 +51,7 @@ function App() {
     if (!value.trim()) return;
     const res = await axios.post("http://localhost:9000/todos", {
       text: value,
-      complete: false,
+      completed: false,
     });
     console.log(res);
     setTodos([...todos, res.data]);
@@ -53,9 +63,13 @@ function App() {
       <h1>To do list:</h1>
       <ul>
         {todos?.map((todo) => (
-          <li key={todo.id}>
+          <li
+            style={{ textDecoration: todo.completed ? "line-through" : "" }}
+            onClick={() => handleUpdate(todo)}
+            key={todo.id}
+          >
             {todo.text}{" "}
-            <button onClick={() => onDelete(todo.id)}>Delete</button>
+            <button onClick={(e) => onDelete(e, todo.id)}>Delete</button>
           </li>
         ))}
       </ul>
