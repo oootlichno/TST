@@ -28,6 +28,10 @@ function App() {
     setValue(evt.target.value);
   };
 
+  const logStuff = () => {
+    console.log('logging stuff')
+  }
+  
   const handleUpdate = async (todo) => {
     await axios.put(
       `http://localhost:9000/todos/${todo.id}`,
@@ -69,6 +73,7 @@ function App() {
           </li>
         ))}
       </ul>
+      <button onClick={logStuff}>log stuff</button>
       <div>
         <form onSubmit={onSubmit}>
           <input

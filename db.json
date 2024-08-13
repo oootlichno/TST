@@ -3,6 +3,11 @@
     {
       "id": "2",
       "text": "Study Sprint 12",
+      "completed": true
+    },
+    {
+      "id": "955b",
+      "text": "asdfasd",
       "completed": false
     }
   ]
