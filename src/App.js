@@ -27,6 +27,10 @@ function App() {
     setValue(evt.target.value);
   };
 
+  const logStuff = () => {
+    console.log('logging stuff')
+  }
+
   const onDelete = async (id) => {
     await axios.delete(`http://localhost:9000/todos/${id}`);
     setTodos(todos.filter((todo) => todo.id !== id));
@@ -55,6 +59,7 @@ function App() {
           </li>
         ))}
       </ul>
+      <button onClick={logStuff}>log stuff</button>
       <div>
         <form onSubmit={onSubmit}>
           <input
