@@ -1,10 +1,19 @@
 {
-    "posts": [
-      { "id": 1, "title": "Post 1", "content": "Content 1" },
-      { "id": 2, "title": "Post 2", "content": "Content 2" }
-    ],
-    "comments": [
-      { "id": 1, "postId": 1, "comment": "Nice post!" },
-      { "id": 2, "postId": 2, "comment": "Interesting read." }
-    ]
-  }
+  "todos": [
+    {
+      "id": "2",
+      "text": "Study Sprint 12",
+      "completed": false
+    },
+    {
+      "id": "3",
+      "text": "Make breakfast",
+      "completed": true
+    },
+    {
+      "id": "9bff",
+      "text": "ldknlkn",
+      "complete": false
+    }
+  ]
+}
